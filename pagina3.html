@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact Spălătorie Auto - trimite-ne un mesaj rapid pe WhatsApp.">
+<meta name="keywords" content="contact, spalatorie auto, whatsapp, mesaj">
+<meta name="author" content="Spalatorie Auto">
+<title>Contact - Spălătorie Auto</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#335b7c,#7da0e7);color:#fff;min-height:100vh;overflow-x:hidden;padding-bottom:50px;}
+
+/* LED indicator */
+.led{position:fixed;top:20px;left:70px;width:15px;height:15px;border-radius:50%;background-color:#021f3f;box-shadow:0 0 5px #000;transition:0.3s;z-index:1001;}
+.led.on{background-color:#00aaff;box-shadow:0 0 15px #00aaff,0 0 30px #00aaff;}
+
+/* Hamburger icon */
+.hamburger{position:fixed;top:20px;left:20px;width:30px;height:25px;cursor:pointer;z-index:1002;}
+.hamburger div{background-color:#021f3f;height:4px;margin:5px 0;transition:0.4s;}
+
+/* Meniu lateral */
+.meniu{position:fixed;top:0;left:0;height:100%;width:230px;background-color:#003366;padding-top:70px;transform:translateX(-100%);transition:transform 0.4s ease;z-index:1000;box-shadow:4px 0 15px rgba(0,170,255,0.4);}
+.meniu.deschis{transform:translateX(0);}
+.meniu a{display:block;padding:16px 24px;color:white;text-decoration:none;font-size:18px;transition:0.3s;}
+.meniu a:hover{background-color:#00aaff79;color:#ffffff;}
+
+/* Conținut contact */
+.content-wrapper{padding:120px 30px 30px 30px;max-width:600px;margin:auto;text-align:center;}
+h1{font-size:36px;margin-bottom:20px;color:#31bd69;}
+.contact-form{background:#e6f0ff54;padding:30px;border-radius:15px;color:#021f3f;box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;margin:10px 0;border:1px solid #cccccc56;border-radius:8px;font-size:16px;}
+.contact-form button{background:#25d366;color:#fff;font-size:18px;border:none;padding:12px 20px;margin-top:10px;border-radius:8px;cursor:pointer;width:100%;transition:0.3s;}
+.contact-form button:hover{background:#1ebe5d;}
+.footer-text{text-align:center;margin-top:20px;color:#e0e0e0;}
+</style>
+</head>
+<body>
+
+<!-- LED indicator -->
+<div class="led" id="led"></div>
+
+<!-- Hamburger icon -->
+<div class="hamburger" onclick="toggleMeniu()">
+  <div></div><div></div><div></div>
+</div>
+
+<!-- Meniu lateral -->
+<div id="meniu" class="meniu">
+  <a href="index.html">• ACASĂ</a>
+  <a href="pagina1.html">• SERVICII</a>
+  <a href="pagina2.html">• PRODUSE</a>
+  <a href="pagina3.html">• CONTACT</a>
+</div>
+
+<!-- Conținut central -->
+<div class="content-wrapper">
+  <h1>Trimite un mesaj pe WhatsApp</h1>
+  <div class="contact-form">
+    <input type="text" id="nume" placeholder="Numele tău">
+    <textarea id="mesaj" rows="5" placeholder="Scrie mesajul tău aici..."></textarea>
+    <button onclick="trimiteWhatsApp()">Trimite pe WhatsApp</button>
+  </div>
+  <p class="footer-text">Contactati-ne pentru orice detaliu.</p>
+</div>
+
+<script>
+function toggleMeniu(){
+  const meniu=document.getElementById("meniu");
+  const led=document.getElementById("led");
+  meniu.classList.toggle("deschis");
+  led.classList.toggle("on");
+}
+
+function trimiteWhatsApp(){
+  const nume=document.getElementById('nume').value.trim();
+  const mesaj=document.getElementById('mesaj').value.trim();
+  const nrWhatsApp="+40752428303"; // <-- AICI TRECI NUMĂRUL TĂU FĂRĂ +
+
+  let text=`Bună! Sunt ${nume || "un client"}.\n ${mesaj || "fără mesaj"}`;
+  let url=`https://wa.me/${nrWhatsApp}?text=${encodeURIComponent(text)}`;
+  window.open(url,'_blank');
+}
+</script>
+
+</body>
+</html>

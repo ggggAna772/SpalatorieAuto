@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Despre Noi - Spălătorie Auto</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #021f3f;
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* LED indicator */
+    .led {
+      position: fixed;
+      top: 20px;
+      left: 70px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #001f5f;
+      box-shadow: 0 0 5px #000;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1001;
+    }
+    .led.on {
+      background-color: #00aaff;
+      box-shadow: 0 0 15px #00aaff, 0 0 30px #00aaff;
+    }
+
+    /* Hamburger icon */
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      z-index: 1002;
+    }
+    .hamburger div {
+      background-color: white;
+      height: 4px;
+      margin: 5px 0;
+      transition: 0.4s;
+    }
+
+    /* Meniu lateral */
+    .meniu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 230px;
+      background-color: #003366;
+      padding-top: 70px;
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+      z-index: 1000;
+      box-shadow: 4px 0 15px rgba(0,170,255,0.4);
+    }
+    .meniu.deschis { transform: translateX(0); }
+    .meniu a {
+      display: block;
+      padding: 16px 24px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .meniu a:hover {
+      background-color: #00aaff33;
+      color: #ffffff;
+    }
+
+    /* Conținut pagină */
+    .content-wrapper {
+      padding: 120px 30px 30px 30px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00aaff;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #ffffff;
+      border-bottom: 2px solid #00aaff;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      margin-left: 20px;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- LED indicator -->
+<div class="led" id="led"></div>
+
+<!-- Hamburger icon -->
+<div class="hamburger" onclick="toggleMeniu()">
+  <div></div><div></div><div></div>
+</div>
+
+<!-- Meniu lateral -->
+<div id="meniu" class="meniu">
+   <a href="index.html">• ACASĂ</a>
+  <a href="pagina1.html">• SERVICII</a>
+  <a href="pagina2.html">• PRODUSE</a>
+  <a href="pagina3.html">• CONTACT</a>
+</div>
+
+<!-- Conținut central -->
+<div class="content-wrapper">
+  <h1>Despre Serviciile Noastre</h1>
+
+  <h2>🛞Spălătorie – Shop Auto</h2>
+  <p>
+    Suntem o spălătorie auto profesionistă care oferă servicii de detailing doar pe bază de programare. 
+    Prețurile serviciilor de detailing pornesc de la <strong>300 RON</strong> cu injecție/extracție tapițerie <strong>100 RON</strong> pentru tratamente ulterioare pentru piele și plastice.
+  </p>
+
+  <h2>🛞Produse Disponibile</h2>
+  <p>
+    Avem pe site 4 produse profesionale de curățare a mașinii. Pentru detalii despre aceste produse sau despre orice serviciu, vă rugăm să ne contactați telefonic.
+  </p>
+
+  <h2>🛞Contact și Programări</h2>
+  <p>
+    Pentru orice detaliu sau programare, vă rugăm să ne contactați telefonic la nr. de telefon 0752 428 303. Serviciile noastre se desfășoară cu profesionalism și atenție la fiecare detaliu.
+  </p>
+</div>
+
+<script>
+  function toggleMeniu() {
+    const meniu = document.getElementById("meniu");
+    const led = document.getElementById("led");
+    meniu.classList.toggle("deschis");
+    led.classList.toggle("on");
+  }
+</script>
+
+</body>
+</html>

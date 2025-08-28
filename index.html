@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pagina de prezentare detailing auto cu meniu LED albastru și design modern.">
+  <meta name="keywords" content="detailing auto, meniu LED, HTML CSS JavaScript">
+  <meta name="author" content="Custom Design">
+  <title>Detailing Auto LED Blue</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #021f3f;
+      color: white;
+      height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* LED indicator */
+    .led {
+      position: fixed;
+      top: 20px;
+      left: 70px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #001f5f;
+      box-shadow: 0 0 5px #000;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1001;
+    }
+    .led.on {
+      background-color: #00aaff;
+      box-shadow: 0 0 15px #00aaff, 0 0 30px #00aaff;
+    }
+
+    /* Hamburger icon */
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      z-index: 1002;
+    }
+    .hamburger div {
+      background-color: white;
+      height: 4px;
+      margin: 5px 0;
+      transition: 0.4s;
+    }
+
+    /* Meniu lateral */
+    .meniu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 230px;
+      background-color: #003366;
+      padding-top: 70px;
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+      z-index: 1000;
+      box-shadow: 4px 0 15px rgba(0,170,255,0.4);
+    }
+    .meniu.deschis { transform: translateX(0); }
+    .meniu a {
+      display: block;
+      padding: 16px 24px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .meniu a:hover {
+      background-color: #00aaff33;
+      color: #ffffff;
+    }
+
+    /* Wrapper central pentru centrare verticală */
+    .content-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .profile {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      border: 4px solid #00aaff;
+      box-shadow: 0 0 20px #00aaff;
+      margin-bottom: 15px;
+      object-fit: cover;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .verified {
+      display: inline-block;
+      vertical-align: middle;
+      width: 20px;
+      height: 20px;
+      background: #1da1f2;
+      color: white;
+      font-size: 14px;
+      text-align: center;
+      border-radius: 50%;
+      line-height: 20px;
+      margin-left: 6px;
+    }
+
+    .location {
+      font-size: 14px;
+      font-weight: 300;
+      color: #bbb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .location i { color: #bbb; }
+
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .gradient-text {
+      background: linear-gradient(45deg, #00aaff, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Butoane servicii / portofoliu */
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .button {
+      padding: 14px 26px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      color: white;
+      background: linear-gradient(45deg, #0055aa, #00aaff);
+      box-shadow: 0 4px 15px rgba(0,170,255,0.6);
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,170,255,0.8);
+    }
+
+    /* Iconițe sociale */
+    .socials {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .socials a {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(57, 188, 52, 0.943);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgb(255, 255, 255);
+      font-size: 22px;
+      transition: transform .2s ease, border-color .2s ease;
+      text-decoration: none;
+    }
+    .socials a:hover {
+      border-color: hsl(134, 100%, 50%);
+      transform: translateY(-3px);
+      color: hsl(134, 100%, 50%);
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: darkgrey;
+      text-align: center;
+      max-width: 600px;
+      margin-top: 40px;
+    }
+
+    h3 { font-size: 32px; color: #bbb; margin: 10px 0; }
+  </style>
+</head>
+<body>
+
+<!-- LED indicator -->
+<div class="led" id="led"></div>
+
+<!-- Hamburger icon -->
+<div class="hamburger" onclick="toggleMeniu()">
+  <div></div><div></div><div></div>
+</div>
+<br><br><br><br><br><br>
+
+<!-- Meniu lateral -->
+<div id="meniu" class="meniu">
+  <a href="index.html">• ACASĂ</a>
+  <a href="pagina1.html">• SERVICII</a>
+  <a href="pagina2.html">• PRODUSE</a>
+  <a href="pagina3.html">• CONTACT</a>
+</div>
+
+<!-- Conținut central -->
+<div class="content-wrapper">
+  <img src="https://i.postimg.cc/fRqV5kJZ/temp-Imagelzpzc-H.avif" alt="Profil" class="profile">
+  <div class="name">Detailing Auto<span class="verified">✓</span></div>
+  <div class="location"><i class="fa-solid fa-location-dot"></i> România</div>
+  <h1>Bun venit la <span class="gradient-text">Detailing Auto</span></h1>
+  <div class="button-container">
+    <a href="pagina1.html" class="button">SERVICII</a>
+    <a href="pagina2.html" class="button">PRODUSE</a>
+  </div>
+  <div class="socials">
+    <a href="https://wa.me/40752428303" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+  <p>
+    ⏲ Servicii profesionale de detailing auto – interior și exterior.<br>
+    ⏲ Deplasari la domiciliu pentru judetele: Galati, Vrancea, Vaslui.
+
+</div>
+</div>
+
+<script>
+  function toggleMeniu() {
+    const meniu = document.getElementById("meniu");
+    const led = document.getElementById("led");
+    meniu.classList.toggle("deschis");
+    led.classList.toggle("on");
+  }
+</script>
+
+</body>
+</html>
